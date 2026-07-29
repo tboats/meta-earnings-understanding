@@ -324,7 +324,10 @@
                 <div class="result-box">
                     <span class="result-title">Implied Stock Price</span>
                     <div class="result-price" id="impliedPrice">$630.57</div>
-                    <div class="result-delta delta-up" id="priceDelta">+$0.00 (0.00%)</div>
+                    <div class="result-delta delta-up" id="priceDelta">+$0.00 (0.00% vs baseline)</div>
+                    <div style="font-size: 0.85rem; color: var(--accent-green); margin: 6px 0; font-weight: 500;" id="marketReturn">
+                        +5.98% (+$35.57) vs $595.00 pre-earnings close
+                    </div>
                     
                     <div class="result-range" id="priceRange">
                         Valuation Range: $616.71 - $645.06
@@ -424,6 +427,7 @@
         const BASE_REVENUE = 59.5;
         const BASE_CAPEX = 135.0;
         const BASE_MARGIN = 41.0;
+        const MARKET_PRICE = 595.00; // July 28, 2026 pre-earnings trading price
 
         const REV_BETA = 2.1725;
         const CAP_BETA = -2.458; // full-market rule of thumb including WACC shift
@@ -446,12 +450,19 @@
             document.getElementById('impliedPrice').textContent = '$' + impliedPriceVal.toFixed(2);
             
             const deltaDisp = document.getElementById('priceDelta');
-            deltaDisp.textContent = (totalDelta >= 0 ? '+' : '') + '$' + totalDelta.toFixed(2) + ' (' + (totalDelta >= 0 ? '+' : '') + pctChange.toFixed(2) + '%)';
+            deltaDisp.textContent = (totalDelta >= 0 ? '+' : '') + '$' + totalDelta.toFixed(2) + ' (' + (totalDelta >= 0 ? '+' : '') + pctChange.toFixed(2) + '% vs baseline)';
             if (totalDelta >= 0) {
                 deltaDisp.className = 'result-delta delta-up';
             } else {
                 deltaDisp.className = 'result-delta delta-down';
             }
+
+            // Market Price Return Comparison
+            const mktReturnVal = impliedPriceVal - MARKET_PRICE;
+            const mktReturnPct = (mktReturnVal / MARKET_PRICE) * 100;
+            const mktDisp = document.getElementById('marketReturn');
+            mktDisp.textContent = (mktReturnVal >= 0 ? '+' : '') + mktReturnPct.toFixed(2) + '% (' + (mktReturnVal >= 0 ? '+' : '') + '$' + mktReturnVal.toFixed(2) + ') vs $595.00 pre-earnings close';
+            mktDisp.style.color = mktReturnVal >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
 
             // Valuation Ranges (Order of $28/share sensitivity range)
             const rangeMin = impliedPriceVal - 13.86;

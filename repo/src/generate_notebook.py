@@ -106,7 +106,7 @@ def create_notebook():
                 "source": [
                     "## 🔍 3. Valuation Results Comparison\n",
                     "Let's compare the implied stock price under DCF and Multiples (P/E, EV/EBITDA) methodologies. \n",
-                    "Current stock price is **$670.27**."
+                    "Current pre-earnings stock price (July 28 close) is **$595.00**."
                 ]
             },
             {
