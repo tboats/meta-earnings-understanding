@@ -21,6 +21,10 @@ has_rules: false
 last_reviewed: "2026-07-16"
 tags: ["finance", "valuation", "meta", "interactive"]
 milestones: []
+github_pages:
+  branch: "main"
+  folder: "/ (root)"
+  base_url: "https://tboats.github.io/meta-earnings-understanding/docs/"
 ---
 
 # Project: meta-valuation
