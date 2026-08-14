@@ -302,7 +302,7 @@
     <div class="container">
         <header>
             <h1>META Platforms (META) Interactive Valuation Model</h1>
-            <p>Reacting to Q2 2026 Earnings & Guidance | First-Principles Analysis</p>
+            <p>Reacting to Q3 2026 Earnings & Guidance | First-Principles Analysis</p>
             <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px; font-size: 0.9rem;">
                 <a href="index.html" style="color: #3b82f6; text-decoration: none; background: rgba(59, 130, 246, 0.1); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.3);">🏠 Master Hub</a>
                 <a href="earnings_prep_q3.html" style="color: #8b5cf6; text-decoration: none; background: rgba(139, 92, 246, 0.15); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.4); font-weight: 600;">🚀 Q3 Playbook</a>
@@ -313,32 +313,32 @@
         <div class="grid-layout">
             <!-- Left Side: Controls -->
             <div class="card">
-                <h2>Model Inputs</h2>
+                <h2>Model Inputs (Q3 2026 Focus)</h2>
                 
                 <div class="control-group">
-                    <label for="q2Revenue">Q2 2026 Revenue ($B)</label>
-                    <input type="range" id="q2Revenue" min="55" max="65" step="0.1" value="59.5">
+                    <label for="q3Revenue">Q3 2026 Revenue ($B)</label>
+                    <input type="range" id="q3Revenue" min="55" max="70" step="0.1" value="62.5">
                     <div class="control-val">
-                        <span>Range: 55.0 - 65.0</span>
-                        <span id="q2RevenueVal">59.5 $B</span>
+                        <span>Range: 55.0 - 70.0</span>
+                        <span id="q3RevenueVal">62.5 $B</span>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label for="q2Margin">Q2 Operating Margin (%)</label>
-                    <input type="range" id="q2Margin" min="25" max="50" step="0.5" value="41.0">
+                    <label for="q3Margin">Q3 Operating Margin (%)</label>
+                    <input type="range" id="q3Margin" min="25" max="50" step="0.5" value="37.0">
                     <div class="control-val">
                         <span>Range: 25% - 50%</span>
-                        <span id="q2MarginVal">41.0 %</span>
+                        <span id="q3MarginVal">37.0 %</span>
                     </div>
                 </div>
 
                 <div class="control-group">
                     <label for="capexGuidance">FY 2026 CapEx Guidance ($B)</label>
-                    <input type="range" id="capexGuidance" min="110" max="160" step="1.0" value="135.0">
+                    <input type="range" id="capexGuidance" min="110" max="160" step="1.0" value="140.0">
                     <div class="control-val">
                         <span>Range: 110 - 160</span>
-                        <span id="capexGuidanceVal">135.0 $B</span>
+                        <span id="capexGuidanceVal">140.0 $B</span>
                     </div>
                 </div>
 
@@ -445,25 +445,27 @@
         let currentScenario = 'optimistic';
         const currentStockPrice = 594.32;
 
-        // Base inputs for Q1 2026
+        // Reported actuals for Q1 and Q2 2026
         const q1Rev = 56.31;
         const q1OpInc = 22.87;
-        const h2Rev2025 = 111.13;
+        const q2RevActual = 60.80; // Q2 reported revenue
+        const q2OpIncActual = 22.36; // Q2 core operating income ex-one-offs
+        const q4Rev2025 = 57.00; // Q4 2025 baseline
         const netCash = 22.44;
         const sharesOutstanding = 2.55;
 
         // Sliders & inputs
         const sliders = {
-            q2Revenue: document.getElementById('q2Revenue'),
-            q2Margin: document.getElementById('q2Margin'),
+            q3Revenue: document.getElementById('q3Revenue'),
+            q3Margin: document.getElementById('q3Margin'),
             capexGuidance: document.getElementById('capexGuidance'),
             wacc: document.getElementById('wacc'),
             weightOpt: document.getElementById('weightOpt')
         };
 
         const values = {
-            q2Revenue: document.getElementById('q2RevenueVal'),
-            q2Margin: document.getElementById('q2MarginVal'),
+            q3Revenue: document.getElementById('q3RevenueVal'),
+            q3Margin: document.getElementById('q3MarginVal'),
             capexGuidance: document.getElementById('capexGuidanceVal'),
             wacc: document.getElementById('waccVal'),
             weightOpt: document.getElementById('weightOptVal'),
@@ -479,8 +481,8 @@
         });
 
         function updateUIValues() {
-            values.q2Revenue.textContent = parseFloat(sliders.q2Revenue.value).toFixed(1) + ' $B';
-            values.q2Margin.textContent = parseFloat(sliders.q2Margin.value).toFixed(1) + ' %';
+            values.q3Revenue.textContent = parseFloat(sliders.q3Revenue.value).toFixed(1) + ' $B';
+            values.q3Margin.textContent = parseFloat(sliders.q3Margin.value).toFixed(1) + ' %';
             values.capexGuidance.textContent = parseFloat(sliders.capexGuidance.value).toFixed(1) + ' $B';
             values.wacc.textContent = parseFloat(sliders.wacc.value).toFixed(2) + ' %';
             values.weightOpt.textContent = sliders.weightOpt.value + '%';
@@ -498,12 +500,12 @@
             recalculate();
         }
 
-        function getProjections(scenario, q2RevVal, q2MarginVal, capexVal, waccVal, termGrowthOverride) {
-            let h2Growth, h2Margin, revGrowth, opMargins, capexProj, rlLosses, exitPE, exitEvEbitda, termGrowth;
+        function getProjections(scenario, q3RevVal, q3MarginVal, capexVal, waccVal, termGrowthOverride) {
+            let q4Growth, q4Margin, revGrowth, opMargins, capexProj, rlLosses, exitPE, exitEvEbitda, termGrowth;
 
             if (scenario === 'optimistic') {
-                h2Growth = 0.28;
-                h2Margin = 0.43;
+                q4Growth = 0.28;
+                q4Margin = 0.43;
                 revGrowth = [0.22, 0.20, 0.18, 0.15];
                 opMargins = [0.38, 0.40, 0.42, 0.43];
                 capexProj = [120.0, 105.0, 90.0, 80.0];
@@ -512,8 +514,8 @@
                 exitEvEbitda = 20.0;
                 termGrowth = termGrowthOverride !== undefined ? termGrowthOverride : 0.025;
             } else if (scenario === 'pessimistic') {
-                h2Growth = 0.10;
-                h2Margin = 0.32;
+                q4Growth = 0.10;
+                q4Margin = 0.32;
                 revGrowth = [0.05, 0.03, 0.02, 0.02];
                 opMargins = [0.28, 0.25, 0.22, 0.20];
                 capexProj = [135.0, 125.0, 115.0, 105.0];
@@ -522,8 +524,8 @@
                 exitEvEbitda = 8.0;
                 termGrowth = termGrowthOverride !== undefined ? termGrowthOverride : 0.010;
             } else { // Baseline
-                h2Growth = 0.18;
-                h2Margin = 0.38;
+                q4Growth = 0.18;
+                q4Margin = 0.38;
                 revGrowth = [0.12, 0.10, 0.08, 0.08];
                 opMargins = [0.34, 0.35, 0.35, 0.36];
                 capexProj = [125.0, 110.0, 100.0, 90.0];
@@ -533,17 +535,17 @@
                 termGrowth = termGrowthOverride !== undefined ? termGrowthOverride : 0.020;
             }
 
-            // projections lists
-            const h2Rev = h2Rev2025 * (1 + h2Growth);
-            const rev2026 = q1Rev + q2RevVal + h2Rev;
+            // 2026 projections incorporating Q1 & Q2 actuals + Q3 input + Q4 baseline
+            const q4Rev = q4Rev2025 * (1 + q4Growth);
+            const rev2026 = q1Rev + q2RevActual + q3RevVal + q4Rev;
 
-            const q2OpInc = q2RevVal * (q2MarginVal / 100.0);
-            const h2OpInc = h2Rev * h2Margin;
-            const op2026 = q1OpInc + q2OpInc + h2OpInc;
+            const q3OpInc = q3RevVal * (q3MarginVal / 100.0);
+            const q4OpInc = q4Rev * q4Margin;
+            const op2026 = q1OpInc + q2OpIncActual + q3OpInc + q4OpInc;
 
             const revenue = [rev2026];
             for(let i=0; i<3; i++) {
-                revenue.append = revenue.push(revenue[revenue.length - 1] * (1 + revGrowth[i]));
+                revenue.push(revenue[revenue.length - 1] * (1 + revGrowth[i]));
             }
             revenue.push(revenue[revenue.length - 1] * (1 + revGrowth[3])); // 2030
 
@@ -564,49 +566,70 @@
             const fcf = [];
             const pv_fcf = [];
 
+            let sum_pv_fcf = 0;
             for (let i = 0; i < 5; i++) {
-                const eb = operating_income[i] + da[i];
-                const ebt = operating_income[i] * (1 - taxRate);
-                const fc = ebt + da[i] - capex[i];
-                ebitda.push(eb);
-                ebiat.push(ebt);
-                fcf.push(fc);
+                ebitda.push(operating_income[i] + da[i]);
+                ebiat.push(operating_income[i] * (1 - taxRate));
+                const currentFcf = ebiat[i] + da[i] - capex[i];
+                fcf.push(currentFcf);
 
-                const pv = fc / Math.pow(1 + waccVal, i + 1);
-                pv_fcf.push(pv);
+                const discountFactor = Math.pow(1 + waccVal, i + 1);
+                const currentPvFcf = currentFcf / discountFactor;
+                pv_fcf.push(currentPvFcf);
+                sum_pv_fcf += currentPvFcf;
             }
 
-            const sum_pv_fcf = pv_fcf.reduce((a, b) => a + b, 0);
-            const terminal_value = fcf[4] * (1 + termGrowth) / (waccVal - termGrowth);
-            const pv_terminal_value = terminal_value / Math.pow(1 + waccVal, 5);
+            // Terminal value calculation
+            const terminalFcf = fcf[4] * (1 + termGrowth);
+            const terminalValue = terminalFcf / (waccVal - termGrowth);
+            const pvTerminalValue = terminalValue / Math.pow(1 + waccVal, 5);
 
-            const dcf_ev = sum_pv_fcf + pv_terminal_value;
-            const dcf_equity_val = dcf_ev + netCash;
-            const dcf_price = dcf_equity_val / sharesOutstanding;
+            const enterpriseValue = sum_pv_fcf + pvTerminalValue;
+            const equityValue = enterpriseValue + netCash;
+            const dcfPrice = equityValue / sharesOutstanding;
+
+            // Multiples
+            const netIncome2030 = (operating_income[4] + rlLosses[4]) * (1 - taxRate);
+            const eps2030 = netIncome2030 / sharesOutstanding;
+            const pePrice2030 = eps2030 * exitPE;
+            const pePricePv = pePrice2030 / Math.pow(1 + waccVal, 4);
+
+            const ebitda2030 = operating_income[4] + da[4];
+            const evEbitdaPrice2030 = ((ebitda2030 * exitEvEbitda) + netCash) / sharesOutstanding;
+            const evEbitdaPricePv = evEbitdaPrice2030 / Math.pow(1 + waccVal, 4);
 
             return {
-                revenue,
-                operating_income,
-                capex,
-                da,
-                ebitda,
-                fcf,
-                dcf_price
+                years: [2026, 2027, 2028, 2029, 2030],
+                revenue: revenue,
+                operating_income: operating_income,
+                capex: capex,
+                da: da,
+                fcf: fcf,
+                pv_fcf: pv_fcf,
+                sum_pv_fcf: sum_pv_fcf,
+                terminalValue: terminalValue,
+                pvTerminalValue: pvTerminalValue,
+                enterpriseValue: enterpriseValue,
+                equityValue: equityValue,
+                dcf_price: dcfPrice,
+                pe_price_pv: pePricePv,
+                ev_ebitda_price_pv: evEbitdaPricePv,
+                termGrowth: termGrowth
             };
         }
 
         function recalculate() {
-            const q2RevVal = parseFloat(sliders.q2Revenue.value);
-            const q2MarginVal = parseFloat(sliders.q2Margin.value);
+            const q3RevVal = parseFloat(sliders.q3Revenue.value);
+            const q3MarginVal = parseFloat(sliders.q3Margin.value);
             const capexVal = parseFloat(sliders.capexGuidance.value);
             const waccVal = parseFloat(sliders.wacc.value) / 100.0;
             const optWeight = parseInt(sliders.weightOpt.value) / 100.0;
             const pesWeight = 1.0 - optWeight;
 
             // Project all 3 scenarios to calculate weighted valuation (Best Estimate)
-            const opt = getProjections('optimistic', q2RevVal, q2MarginVal, capexVal, waccVal);
-            const pes = getProjections('pessimistic', q2RevVal, q2MarginVal, capexVal, waccVal);
-            const base = getProjections('base', q2RevVal, q2MarginVal, capexVal, waccVal);
+            const opt = getProjections('optimistic', q3RevVal, q3MarginVal, capexVal, waccVal);
+            const pes = getProjections('pessimistic', q3RevVal, q3MarginVal, capexVal, waccVal);
+            const base = getProjections('base', q3RevVal, q3MarginVal, capexVal, waccVal);
 
             // Update simple display cards
             document.getElementById('optPrice').textContent = '$' + opt.dcf_price.toFixed(2);
@@ -616,14 +639,12 @@
             document.getElementById('weightedPrice').textContent = '$' + weightedPriceVal.toFixed(2);
 
             // Ranges Calculations (WACC +/- 0.05%, Terminal Growth +/- 0.1%)
-            // Min range
-            const optMin = getProjections('optimistic', q2RevVal, q2MarginVal, capexVal, waccVal + 0.0005, 0.024);
-            const pesMin = getProjections('pessimistic', q2RevVal, q2MarginVal, capexVal, waccVal + 0.0005, 0.009);
+            const optMin = getProjections('optimistic', q3RevVal, q3MarginVal, capexVal, waccVal + 0.0005, 0.024);
+            const pesMin = getProjections('pessimistic', q3RevVal, q3MarginVal, capexVal, waccVal + 0.0005, 0.009);
             const rangeMin = optMin.dcf_price * optWeight + pesMin.dcf_price * pesWeight;
 
-            // Max range
-            const optMax = getProjections('optimistic', q2RevVal, q2MarginVal, capexVal, waccVal - 0.0005, 0.026);
-            const pesMax = getProjections('pessimistic', q2RevVal, q2MarginVal, capexVal, waccVal - 0.0005, 0.011);
+            const optMax = getProjections('optimistic', q3RevVal, q3MarginVal, capexVal, waccVal - 0.0005, 0.026);
+            const pesMax = getProjections('pessimistic', q3RevVal, q3MarginVal, capexVal, waccVal - 0.0005, 0.011);
             const rangeMax = optMax.dcf_price * optWeight + pesMax.dcf_price * pesWeight;
 
             document.getElementById('weightedRange').textContent = `Range: $${rangeMin.toFixed(2)} - $${rangeMax.toFixed(2)}`;
