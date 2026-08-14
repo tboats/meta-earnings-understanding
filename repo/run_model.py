@@ -14,7 +14,7 @@ def print_banner():
     print("      META PLATFORMS (META) FIRST-PRINCIPLES FINANCIAL MODEL")
     print("=" * 60)
     print("Current Local Time: July 2026")
-    print("Current META Stock Price (July 28 Pre-Earnings): $595.00")
+    print("Current META Stock Price (August 14, 2026): $594.32")
     print("Diluted Shares Outstanding: 2.55B")
     print("Net Cash Balance: $22.44B ($81.18B cash - $58.74B debt)")
     print("=" * 60)

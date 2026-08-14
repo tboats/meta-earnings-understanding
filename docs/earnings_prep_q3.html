@@ -327,28 +327,28 @@
 
         <!-- Top Executive Summary Banner -->
         <div class="card" style="border: 1px solid var(--accent-purple); background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.05)); margin-bottom: 25px;">
-            <h2 style="color: var(--accent-purple); margin-bottom: 10px;">⚡ Quick Take: What if Meta meets Q3 expectations exactly?</h2>
+            <h2 style="color: var(--accent-purple); margin-bottom: 10px;">⚡ Quick Take: Mid-August 2026 Market Status & Q3 Outlook</h2>
             <p style="font-size: 1.05rem; line-height: 1.5; color: var(--text-primary);">
-                If Q3 Revenue ($62.5B midpoint), FY26 CapEx ($140.0B midpoint), and Operating Margin (37.0%) hit baseline guidance exactly, we expect the stock to <strong>jump +4.5% to +5.5% (targeting ~$560 &ndash; $565)</strong>.
+                As of <strong>August 14, 2026</strong>, Meta stock has recovered +10.5% off its post-Q2 earnings low to <strong>$594.32</strong>. At this level, the stock trades at a slight premium over baseline fair value ($562.26), pricing in expected top-line beat momentum for Q3.
             </p>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; margin-bottom: 20px;">
                 <div style="background: rgba(0,0,0,0.2); padding: 12px 15px; border-radius: 10px; border-left: 3px solid var(--accent-blue);">
-                    <div style="font-size: 0.8rem; color: var(--text-secondary);">Pre-Q3 Market Price</div>
-                    <div style="font-size: 1.3rem; font-weight: bold; color: var(--text-primary);">$538.00</div>
-                    <div style="font-size: 0.75rem; color: var(--accent-red);">Post-Q2 pull-back price level</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary);">Market Price (Aug 14, 2026)</div>
+                    <div style="font-size: 1.3rem; font-weight: bold; color: var(--text-primary);">$594.32</div>
+                    <div style="font-size: 0.75rem; color: var(--accent-green);">+10.5% recovery off $538 low</div>
                 </div>
 
                 <div style="background: rgba(0,0,0,0.2); padding: 12px 15px; border-radius: 10px; border-left: 3px solid var(--accent-purple);">
-                    <div style="font-size: 0.8rem; color: var(--text-secondary);">Model Q3 Baseline Fair Value</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary);">Q3 Baseline Fair Value</div>
                     <div style="font-size: 1.3rem; font-weight: bold; color: var(--text-primary);">$562.26</div>
-                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Intrinsic baseline DCF value</div>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Assumes $62.5B Rev / $140B CapEx</div>
                 </div>
 
                 <div style="background: rgba(0,0,0,0.2); padding: 12px 15px; border-radius: 10px; border-left: 3px solid var(--accent-green);">
-                    <div style="font-size: 0.8rem; color: var(--text-secondary);">Expected "Relief Rally"</div>
-                    <div style="font-size: 1.3rem; font-weight: bold; color: var(--accent-green);">+4.5% to +5.5%</div>
-                    <div style="font-size: 0.75rem; color: var(--accent-green);">Clears Q3 CapEx uncertainty</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary);">Optimistic Target Range</div>
+                    <div style="font-size: 1.3rem; font-weight: bold; color: var(--accent-green);">$620 &ndash; $645</div>
+                    <div style="font-size: 0.75rem; color: var(--accent-green);">Requires Q3 Rev &gt;$63.5B</div>
                 </div>
             </div>
 
@@ -522,7 +522,7 @@
         const BASE_REVENUE = 62.5;
         const BASE_CAPEX = 140.0;
         const BASE_MARGIN = 37.0;
-        const MARKET_PRICE = 538.00; // Pre-Q3 trading price benchmark
+        const MARKET_PRICE = 594.32; // August 14, 2026 trading price benchmark
 
         const REV_BETA = 2.1725;
         const CAP_BETA = -2.458; 
@@ -556,7 +556,7 @@
             const mktReturnVal = impliedPriceVal - MARKET_PRICE;
             const mktReturnPct = (mktReturnVal / MARKET_PRICE) * 100;
             const mktDisp = document.getElementById('marketReturn');
-            mktDisp.textContent = (mktReturnVal >= 0 ? '+' : '') + mktReturnPct.toFixed(2) + '% (' + (mktReturnVal >= 0 ? '+' : '') + '$' + mktReturnVal.toFixed(2) + ') vs $538.00 pre-release trading price';
+            mktDisp.textContent = (mktReturnVal >= 0 ? '+' : '') + mktReturnPct.toFixed(2) + '% (' + (mktReturnVal >= 0 ? '+' : '') + '$' + mktReturnVal.toFixed(2) + ') vs $594.32 pre-Q3 market price';
             mktDisp.style.color = mktReturnVal >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
 
             // Valuation Ranges
