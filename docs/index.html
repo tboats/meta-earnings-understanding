@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>META Intelligence Hub | Valuation & Earnings Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 28, 45, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-purple: #8b5cf6;
+            --font-family: 'Plus Jakarta Sans', sans-serif;
+            --heading-font: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.12) 0px, transparent 50%);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header .badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-purple);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        header h1 {
+            font-family: var(--heading-font);
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-family: var(--heading-font);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Status Grid */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .status-card {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px 20px;
+        }
+
+        .status-title {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 5px;
+        }
+
+        .status-val {
+            font-family: var(--heading-font);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .status-desc {
+            font-size: 0.78rem;
+            margin-top: 4px;
+        }
+
+        /* Master Hub Links Grid */
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .hub-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.25s ease;
+        }
+
+        .hub-card:hover {
+            border-color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.06);
+            transform: translateY(-3px);
+        }
+
+        .hub-card-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .hub-card-title {
+            font-family: var(--heading-font);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .hub-card-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .hub-card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .hub-card:hover .hub-card-btn {
+            color: #c084fc;
+        }
+
+        /* Developments Timeline List */
+        .dev-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .dev-item {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 18px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .dev-item.green { border-left-color: var(--accent-green); }
+        .dev-item.purple { border-left-color: var(--accent-purple); }
+
+        .dev-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .dev-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .dev-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .dev-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="badge">Antigravity Financial Engine</div>
+            <h1>META Intelligence & Valuation Hub</h1>
+            <p>A centralized first-principles platform tracking Meta Platforms' stock valuation, financial models, and strategic AI developments.</p>
+        </header>
+
+        <!-- Section 1: Live Market & Valuation Status -->
+        <div class="card">
+            <h2>📈 Live Market & Model Summary (Mid-August 2026)</h2>
+            <p>Real-time valuation metrics comparing META's market trading price against our first-principles DCF model baselines:</p>
+            
+            <div class="status-grid">
+                <div class="status-card" style="border-left: 3px solid var(--accent-blue);">
+                    <div class="status-title">Market Trading Price</div>
+                    <div class="status-val">$594.32</div>
+                    <div class="status-desc" style="color: var(--accent-green);">+10.5% recovery off $538 post-Q2 low</div>
+                </div>
+
+                <div class="status-card" style="border-left: 3px solid var(--accent-purple);">
+                    <div class="status-title">Q3 Baseline Fair Value</div>
+                    <div class="status-val">$562.26</div>
+                    <div class="status-desc" style="color: var(--text-secondary);">DCF Range: $548.40 &ndash; $576.75</div>
+                </div>
+
+                <div class="status-card" style="border-left: 3px solid var(--accent-green);">
+                    <div class="status-title">Market Premium vs Baseline</div>
+                    <div class="status-val" style="color: var(--accent-green);">+5.7%</div>
+                    <div class="status-desc" style="color: var(--accent-green);">+$32.06 premium pricing in Q3 beat</div>
+                </div>
+
+                <div class="status-card" style="border-left: 3px solid var(--accent-purple);">
+                    <div class="status-title">FY 2026 CapEx Midpoint</div>
+                    <div class="status-val">$140.0B</div>
+                    <div class="status-desc" style="color: var(--text-secondary);">Revised guidance range $135B &ndash; $145B</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Master Navigation Hub -->
+        <div class="card">
+            <h2>🌐 Interactive Dashboards & Playbooks</h2>
+            <p>Access our suite of interactive valuation tools, earnings prep guides, and backtest calculators:</p>
+
+            <div class="hub-grid">
+                <a href="earnings_prep_q3.html" class="hub-card">
+                    <div>
+                        <div class="hub-card-icon">🚀</div>
+                        <div class="hub-card-title">Q3 2026 Earnings Playbook</div>
+                        <div class="hub-card-desc">Active playbook for the upcoming Q3 print. Features live impact calculator, baseline scenarios, and step-by-step release checklist.</div>
+                    </div>
+                    <div class="hub-card-btn">Open Q3 Playbook &rarr;</div>
+                </a>
+
+                <a href="interactive_model.html" class="hub-card">
+                    <div>
+                        <div class="hub-card-icon">🧮</div>
+                        <div class="hub-card-title">Interactive DCF Valuation Model</div>
+                        <div class="hub-card-desc">Full interactive financial model. Adjust Revenue, CapEx, Margins, WACC, and scenario weightings with real-time graphical feedback.</div>
+                    </div>
+                    <div class="hub-card-btn">Launch DCF Model &rarr;</div>
+                </a>
+
+                <a href="earnings_prep_q2.html" class="hub-card">
+                    <div>
+                        <div class="hub-card-icon">📂</div>
+                        <div class="hub-card-title">Q2 2026 Earnings Archive</div>
+                        <div class="hub-card-desc">Retrospective evaluation of Q2 actuals ($60.8B Revenue, $140B CapEx midpoint, $3.58B one-offs) and post-earnings price mechanics.</div>
+                    </div>
+                    <div class="hub-card-btn">View Q2 Archive &rarr;</div>
+                </a>
+
+                <a href="interactive_backtest.html" class="hub-card">
+                    <div>
+                        <div class="hub-card-icon">📉</div>
+                        <div class="hub-card-title">Q1 Earnings Backtest Engine</div>
+                        <div class="hub-card-desc">Backtest tool comparing pre-release expectations (April 29) vs post-release reality (April 30) for the $611 price drop.</div>
+                    </div>
+                    <div class="hub-card-btn">Launch Backtest &rarr;</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Section 3: Latest Strategic & Public Developments -->
+        <div class="card">
+            <h2>📰 Latest Developments & Strategic Intelligence</h2>
+            <p>Key public developments, AI releases, and capital structure updates impacting Meta's fundamental valuation:</p>
+
+            <div class="dev-list">
+                <div class="dev-item purple">
+                    <div class="dev-header">
+                        <div class="dev-title">🤖 Release of "Muse Glimmer" 30B Open-Weight Agentic AI Model</div>
+                        <div class="dev-date">August 10, 2026</div>
+                    </div>
+                    <div class="dev-desc">
+                        Meta released Muse Glimmer (30B open-weight model) designed to run locally on consumer hardware. This continues Meta's strategy of <em>"commoditizing the complement"</em>—freeing developers from proprietary cloud tolls while driving ad monetization on core Family of Apps platforms.
+                    </div>
+                </div>
+
+                <div class="dev-item green">
+                    <div class="dev-header">
+                        <div class="dev-title">🏗️ Off-Balance Sheet Infrastructure: $27B "Project Hyperion" JV</div>
+                        <div class="dev-date">August 2026</div>
+                    </div>
+                    <div class="dev-desc">
+                        Partnered with Blue Owl Capital on a $27B joint venture for the Hyperion data center project in Louisiana. This structure allows Meta to aggressively expand AI infrastructure capacity while mitigating direct balance-sheet debt leverage.
+                    </div>
+                </div>
+
+                <div class="dev-item">
+                    <div class="dev-header">
+                        <div class="dev-title">💡 $1 Billion Data Center Community Infrastructure Fund</div>
+                        <div class="dev-date">August 10, 2026</div>
+                    </div>
+                    <div class="dev-desc">
+                        Established a $1B community fund dedicated to supporting local power grids, water management, and utility infrastructure in data center regions, alleviating municipal friction over resource usage.
+                    </div>
+                </div>
+
+                <div class="dev-item green">
+                    <div class="dev-header">
+                        <div class="dev-title">📈 AI Monetization Scaling (Meta AI & Advantage+)</div>
+                        <div class="dev-date">August 2026</div>
+                    </div>
+                    <div class="dev-desc">
+                        Meta AI daily active interactions surged +60% YoY, while Advantage+ automated ad revenue velocity accelerated. Ad impressions (+14%) and average price per ad (+12%) confirm recommendation models continue to enhance ad pricing power.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>META Intelligence & Valuation Hub &bull; Updated August 2026 &bull; Antigravity Financial Engine</p>
+        </div>
+    </div>
+</body>
+</html>
