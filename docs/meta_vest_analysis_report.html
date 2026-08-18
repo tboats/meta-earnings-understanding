@@ -404,38 +404,6 @@
             <button class="tab-btn active" id="tab-last5y" onclick="selectTimeframe('last5y')">🚀 (c) Last 5 Years (2021–2026)</button>
         </div>
 
-        <!-- Trading Window Constraint Banner -->
-        <div class="window-banner">
-            <div class="window-banner-text">
-                🚨 <strong>Trading Window Constraint</strong>: The employee trading window closes at <strong>V+10</strong> (10 trading days post-vest). All recommended execution strategies focus on maximizing value within the <strong>V+0 to V+10</strong> active window.
-            </div>
-            <div class="window-badge">WINDOW CLOSES AT V+10</div>
-        </div>
-
-        <!-- Top Metric Cards -->
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-title">Sample Size</div>
-                <div class="metric-value cyan" id="m-events">22 Vests</div>
-                <div class="metric-sub" id="m-period">2021–2026</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-title">V+1 Market Open (O1)</div>
-                <div class="metric-value orange" id="m-o1-val">-1.12%</div>
-                <div class="metric-sub" id="m-o1-sub">Win Rate vs V+0: 13.6%</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-title">Post-Vest Dip (V+3 Close)</div>
-                <div class="metric-value negative" id="m-v3-val">-2.22%</div>
-                <div class="metric-sub" id="m-v3-sub">Median: -2.75% | Win: 22.7%</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-title">Window Close (V+10 Close)</div>
-                <div class="metric-value positive" id="m-v10-val">-1.58%</div>
-                <div class="metric-sub" id="m-v10-sub">Median Return | Win: 40.9%</div>
-            </div>
-        </div>
-
         <!-- Executive Strategy Roadmap (Positioned at Top of Page) -->
         <div class="section-card" style="border: 1px solid rgba(0, 242, 254, 0.35); background: linear-gradient(135deg, rgba(0, 242, 254, 0.07) 0%, rgba(255, 159, 67, 0.04) 100%);">
             <div class="verdict-header">
@@ -515,7 +483,44 @@
                     </tbody>
                 </table>
             </div>
+        </div>
 
+        <!-- Appendix: Summary Metrics & Trading Window Constraints -->
+        <div class="section-card">
+            <h2 class="section-title">📌 Appendix: Key Metrics & Trading Window Rules</h2>
+            <p class="section-desc">Reference summary metrics and trading window boundaries for the selected timeframe.</p>
+
+            <!-- Trading Window Constraint Banner -->
+            <div class="window-banner">
+                <div class="window-banner-text">
+                    🚨 <strong>Trading Window Constraint</strong>: The employee trading window closes at <strong>V+10</strong> (10 trading days post-vest). All recommended execution strategies focus on maximizing value within the <strong>V+0 to V+10</strong> active window.
+                </div>
+                <div class="window-badge">WINDOW CLOSES AT V+10</div>
+            </div>
+
+            <!-- Top Metric Cards -->
+            <div class="metrics-grid" style="margin-bottom: 0;">
+                <div class="metric-card">
+                    <div class="metric-title">Sample Size</div>
+                    <div class="metric-value cyan" id="m-events">22 Vests</div>
+                    <div class="metric-sub" id="m-period">2021–2026</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">V+1 Market Open (O1)</div>
+                    <div class="metric-value orange" id="m-o1-val">-1.12%</div>
+                    <div class="metric-sub" id="m-o1-sub">Win Rate vs V+0: 13.6%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Post-Vest Dip (V+3 Close)</div>
+                    <div class="metric-value negative" id="m-v3-val">-2.22%</div>
+                    <div class="metric-sub" id="m-v3-sub">Median: -2.75% | Win: 22.7%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Window Close (V+10 Close)</div>
+                    <div class="metric-value positive" id="m-v10-val">-1.58%</div>
+                    <div class="metric-sub" id="m-v10-sub">Median Return | Win: 40.9%</div>
+                </div>
+            </div>
         </div>
 
         <footer>
