@@ -544,13 +544,19 @@
                 shapes: [
                     {
                         type: 'line',
+                        x0: 'V+1', x1: 'V+1',
+                        y0: 0, y1: 1, yref: 'paper',
+                        line: { color: '#34d399', width: 2, dash: 'dash' }
+                    },
+                    {
+                        type: 'line',
                         x0: 'V+10', x1: 'V+10',
                         y0: 0, y1: 1, yref: 'paper',
-                        line: { color: '#ef4444', width: 3, dash: 'dash' }
+                        line: { color: '#ef4444', width: 2.5, dash: 'dash' }
                     },
                     {
                         type: 'rect',
-                        x0: 'V+0', x1: 'V+10',
+                        x0: 'V+1', x1: 'V+10',
                         y0: 0, y1: 1, yref: 'paper',
                         fillcolor: 'rgba(16, 185, 129, 0.03)',
                         line: { width: 0 }
@@ -558,10 +564,16 @@
                 ],
                 annotations: [
                     {
-                        x: 'V+10', y: 1.02, yref: 'paper',
-                        text: 'Trading Window Closes (V+10)',
+                        x: 'V+1', y: 1.02, yref: 'paper',
+                        text: 'First Sell Day (V+1)',
                         showarrow: false,
-                        font: { color: '#ef4444', size: 12, family: 'Inter' }
+                        font: { color: '#34d399', size: 11, family: 'Inter' }
+                    },
+                    {
+                        x: 'V+10', y: 1.02, yref: 'paper',
+                        text: 'Window Closes (V+10)',
+                        showarrow: false,
+                        font: { color: '#ef4444', size: 11, family: 'Inter' }
                     }
                 ]
             };
