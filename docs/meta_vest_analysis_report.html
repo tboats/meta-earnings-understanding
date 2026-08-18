@@ -436,13 +436,6 @@
             </div>
         </div>
 
-        <!-- NEW SECTION: Rolling 4-Quarter Price Ratio P(V+1) / P(V+10) -->
-        <div class="section-card">
-            <h2 class="section-title">Historical Shift: Rolling 4-Quarter Ratio of Price P(V+1) / P(V+10)</h2>
-            <p class="section-desc">Tracks whether selling early on V+1 yielded a HIGHER price than holding to V+10 over time. Ratio &gt; 1.00 means V+1 price was HIGHER than V+10 (selling early WON). Ratio &lt; 1.00 means holding to V+10 WON.</p>
-            <div id="chart-ratio" class="chart-container"></div>
-        </div>
-
         <!-- Section 1: Separate OPEN & CLOSE Trajectory Charts -->
         <div class="section-card">
             <h2 class="section-title">Separate OPEN vs CLOSE Trajectories (with 95% Confidence Interval)</h2>
@@ -458,6 +451,13 @@
                     <div id="chart-close" class="chart-container"></div>
                 </div>
             </div>
+        </div>
+
+        <!-- Historical Shift: Rolling 4-Quarter Price Ratio P(V+1) / P(V+10) (Just above Win Rate chart) -->
+        <div class="section-card">
+            <h2 class="section-title">Historical Shift: Rolling 4-Quarter Ratio of Price P(V+1) / P(V+10)</h2>
+            <p class="section-desc">Tracks whether selling early on V+1 yielded a HIGHER price than holding to V+10 over time. Ratio &gt; 1.00 means V+1 price was HIGHER than V+10 (selling early WON). Ratio &lt; 1.00 means holding to V+10 WON.</p>
+            <div id="chart-ratio" class="chart-container"></div>
         </div>
 
         <!-- Section 2: OPEN vs CLOSE Win Rates -->
